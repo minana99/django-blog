@@ -1,5 +1,6 @@
 from django.shortcuts import render
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView,ListView
+from .models import Blog,Category
 
 def index(request):
     #TOP画面を表示する関数
@@ -11,3 +12,8 @@ class IndexView(TemplateView):
         context = self.get_context_data(**kwargs)
         print("IndexViewを使ってTOP画面を表示します！")
         return self.render_to_response(context)
+
+class BlogListView(ListView):
+    template_name ='blog/blog_list.html'
+    model = Blog
+    queryset = Blog.objects.all()
